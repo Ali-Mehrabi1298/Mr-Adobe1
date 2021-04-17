@@ -1,0 +1,19 @@
+﻿
+
+
+
+@model IEnumerable< Slider>
+
+@foreach (var Slier1 in Model)
+{
+        <div class="item active">
+            <figure>
+                <img src="img/slide/@(Slier1.Name).jpg" alt="">
+                <figcaption></figcaption>
+            </figure>
+            <div class="carousel-caption">
+                <h3>دیزاینر</h3>
+                <p>طراحی  رو از همین امروز شروع کن</p>
+            </div>
+        </div>
+}

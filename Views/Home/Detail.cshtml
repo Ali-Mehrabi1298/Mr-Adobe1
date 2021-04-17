@@ -1,0 +1,221 @@
+﻿@inject SignInManager<IdentityUser> SignInManager
+@model AddDetailView
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="col-md-3"></div>
+
+
+<div class="rtl col-md-7" style="text-align:right;font:200">
+    <h1 class="display-5">@Model.product.Title</h1>
+    <hr />
+    <img src="@($"/img/{Model.product.Title}.jpg")"
+         alt="@Model.product.Title"
+         class="img-thumbnail" style="width:400px;height:300px" />
+    <hr />
+    <p class="py-5 text-justify col-md  ">@Model.product.Text</p>
+    <br />
+
+
+    @if (Model.product.Free == true)
+    {
+
+        <h3>قیمت   : <del> @Model.product.Price تومان</del>  </h3> <h5 style="margin-right:5px">0تومان</h5>
+        <br />
+
+        @foreach (var S in Model.Filess)
+
+        {
+
+            <hr />
+            <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+                <div>
+                    <div style="float:left">
+                        <a class="btn btn-success" href="/File/@(S.Name).mp4" download="downloude">دانلود</a>
+
+                        <a class="btn btn-primary" href="/File/@(S.Name).mp4">
+                            پخش
+
+                        </a>
+
+                    </div>
+
+
+                    <ul style="display:flex;list-style:none">
+                        <li>  @(S.part)-  </li>
+                        <li>@(S.Description)   </li>
+                    </ul>
+
+
+                </div>
+
+
+
+            </div>
+
+        }}
+
+    else
+    {
+        <h3>قیمت :   @Model.product.Price تومان</h3>
+        <a class="btn btn-success "
+           id="Add"
+           asp-controller="Orders" asp-action="AddToCart" asp-route-id="@Model.product.ProductId">افزودن به سبد خرید</a>
+        <br />
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+
+            @try
+            {
+
+                @if (User.Identity.Name == Model.order.UserName && Model.product.ProductId == Model.order.productId && Model.order.IsFinaly == true)
+                {
+
+
+                    @foreach (var S in Model.Filess)
+
+                    {
+
+
+
+
+                        <hr />
+                        <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+                            <div>
+                                <div style="float:left">
+                                    <a class="btn btn-success" href="/File/@(S.Name).mp4" download="downloude">دانلود</a>
+
+                                    <a class="btn btn-primary" href="/File/@(S.Name).mp4">
+                                        پخش
+
+                                    </a>
+
+                                </div>
+
+
+                                <ul style="display:flex;list-style:none">
+                                    <li>  @(S.part)-  </li>
+                                    <li>@(S.Description)   </li>
+                                </ul>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+                    }
+
+
+                } }
+            catch
+            {
+                @foreach (var S in Model.Filess)
+
+                {
+
+
+
+
+                    <hr />
+                    <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+                        <div>
+                            <div style="float:left">
+                                <a class="btn btn-success" href="#Add">دانلود</a>
+
+                                <a class="btn btn-primary" href="#Add">
+                                    پخش
+
+                                </a>
+
+                            </div>
+
+
+                            <ul style="display:flex;list-style:none">
+                                <li>  @(S.part)-  </li>
+                                <li>@(S.Description)   </li>
+                            </ul>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                }
+
+
+            }
+
+
+        }
+        else
+        {
+            @foreach (var S in Model.Filess)
+
+            {
+
+
+
+
+                <hr />
+                <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+                    <div>
+                        <div style="float:left">
+                            <a class="btn btn-success" href="#Add">دانلود</a>
+
+                            <a class="btn btn-primary" href="#Add">
+                                پخش
+
+                            </a>
+
+                        </div>
+
+
+                        <ul style="display:flex;list-style:none">
+                            <li>  @(S.part)-  </li>
+                            <li>@(S.Description)   </li>
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+
+            }
+
+
+        }
+
+
+    }
+
+
+    <hr />
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

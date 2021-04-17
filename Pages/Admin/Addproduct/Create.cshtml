@@ -1,0 +1,59 @@
+﻿@page
+@model MohamadShop.Pages.Admin.Addproduct.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<hr />
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="Product.Title" class="control-label"></label>*@
+                <input asp-for="Product.Title" class="form-control"  placeholder="نام محصول را وارد نمایید"/>
+                <span asp-validation-for="Product.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Product.Text" class="control-label"></label>*@
+                <input asp-for="Product.Text" class="form-control"  placeholder="توضیحات محصول را وارد نمایید"/>
+                <span asp-validation-for="Product.Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Product.Price" class="control-label"></label>*@
+                <input asp-for="Product.Price" class="form-control"  placeholder="قیمت محصول را وارد نمایید"/>
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                رایگان باشد؟
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Product.Free" /> @Html.DisplayNameFor(model => model.Product.Free)
+                </label>
+            </div>
+
+
+            <div> هشدار:عکس حتما فرمتjpgباشد</div>
+            <div><label @*asp-for="Productse.Picture"*@> عکس</label></div>
+            <div>
+                <input asp-for="Productse.Picture" />
+                <span asp-validation-for="Productse.Picture"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="ایجاد" class="btn btn-primary" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-dark" asp-page="Index"> بازگشت به صفحه </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

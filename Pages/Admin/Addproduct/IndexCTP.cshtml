@@ -1,0 +1,45 @@
+﻿@page
+@model MohamadShop.Pages.Admin.IndexModel
+
+
+
+
+<p>
+    <a class="btn btn-info" asp-page="CreateCTP">افزودن دسته جدید</a>
+</p>
+<div class="col-md-2"></div>
+    <table class="table">
+
+        <thead>
+            <tr>
+
+                <th>
+                    @*@Html.DisplayNameFor(model => model.CategoryToproduct[0].Category)*@
+                    دسته بندی ها
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.CategoryToproduct[0].Product)*@
+                    آیدی محصول
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CategoryToproduct)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Text)
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-page="./EditCTP" asp-route-id="@item.Id">ویرایش</a>
+                        <a class="btn btn-success" asp-page="./DetailsCTP" asp-route-id="@item.Id">جزییات</a>
+                        <a class="btn btn-danger" asp-page="./DeleteCTP" asp-route-id="@item.Id">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

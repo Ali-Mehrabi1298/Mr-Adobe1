@@ -1,0 +1,41 @@
+﻿@page
+@model MohamadShop.Pages.Admin.AddFile.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            نام فایل
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Filess.Name)
+        </dd>
+        <dt class="col-sm-2">
+         توضیحات
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Filess.Description)
+        </dd>
+        <dt class="col-sm-2">
+        نام محصول
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Filess.productName)
+        </dd>
+        <dt class="col-sm-2">
+          قسمت
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Filess.part)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Filess.Id">ویرایش</a> |
+    <a class="btn btn-block" asp-page="./Index">بازگشت به صفحه</a>
+</div>

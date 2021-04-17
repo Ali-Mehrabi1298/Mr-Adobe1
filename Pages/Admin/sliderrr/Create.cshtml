@@ -1,0 +1,53 @@
+﻿@page
+@model MohamadShop.Pages.Admin.sliderrr.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-md-3"></div>
+        <div class="col-md-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @*<label asp-for="Slider.Name" class="control-label"></label>*@
+                    <input asp-for="Slider.Name" class="form-control" placeholder="نام محصول" />
+                    <span asp-validation-for="Slider.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @*<label asp-for="Slider.Description" class="control-label"></label>*@
+                    <input asp-for="Slider.Description" class="form-control" placeholder="توضیحات " />
+                    <span asp-validation-for="Slider.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <input asp-for="Slider.ProductId" class="form-control" placeholder="آیدی محصول " />
+                    <span asp-validation-for="Slider.ProductId" class="text-danger"></span>
+                </div>
+
+                <div> هشدار:عکس حتما فرمتjpgباشد</div>
+                <div><label @*asp-for="Productse.Picture"*@> عکس</label></div>
+                <div>
+                    <input asp-for="Productse.Picture" />
+                    <span asp-validation-for="Productse.Picture"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="ایجاد شود" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-dark" asp-page="Index">بازگشت به صفحه</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,27 @@
+﻿
+
+
+
+@model Slider
+
+
+
+<div class="item">
+ 
+    <a asp-action="Detail"
+       asp-controller="Home"
+       asp-route-id="@Model.ProductId">
+        <figure>
+            <img src="img/slide/@(Model.Name).jpg" alt="MrAdobi">
+            <figcaption></figcaption>
+        </figure>
+
+        <div class="carousel-caption">
+           
+                <h3>چرا شاد نباشیم</h3>
+                <p>مجموعه مقالات روانشناسی سارتر</p>
+           
+        </div>
+    </a>
+</div>
+

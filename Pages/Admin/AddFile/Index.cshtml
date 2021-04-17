@@ -1,0 +1,64 @@
+﻿@page
+@model MohamadShop.Pages.Admin.AddFile.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<p>
+    <a class="btn btn-info" asp-page="Create">افزودن جدید </a>
+</p>
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Filess[0].Name)
+                </th>
+                <th>
+                    نام
+                </th>
+                <th>
+                    توضیحات
+                </th>
+                <th>
+                    نام محصول
+                </th>
+                <th>
+                    قسمت
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Filess)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.part)
+                    </td>
+                    <td>
+                        <a class="btn btn-warning " asp-page="./Edit" asp-route-id="@item.Id">ویرایش</a> |
+                        <a class="btn btn-success " asp-page="./Details" asp-route-id="@item.Id">جزییات</a> |
+                        <a class="btn btn-danger " asp-page="./Delete" asp-route-id="@item.Id">حذف</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>

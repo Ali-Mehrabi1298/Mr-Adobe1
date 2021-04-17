@@ -1,0 +1,111 @@
+﻿
+
+@model LoginViewModel
+
+
+
+
+<div class="row ">
+    <div class="col-md-4"></div>
+    <div class="container">
+    <div class="col-md-5  alert alert-info" style="width: 372px; margin-right: 9px">
+        <div class="card border-success     bg-light "  style=" padding-right: 15px;" >
+            <div class="card-header bg-transparent border-success alert alert-primary">وارد حساب کاربریتان شوید</div>
+            <hr />
+
+            <div class="card-body text-success" style=" width: 282px; ">
+
+
+                <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["returnUrl"]"
+                      method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
+
+                    @if (ViewData["ErrorMessage"] != null)
+                    {
+                        <div class="text-danger">@ViewData["ErrorMessage"]</div>
+                    }
+
+                    <label asp-for="UserName" class="col-md control-label"></label>
+                    <div class="col-md">
+                        <input asp-for="UserName" class="form-control " style="width:282px;" placeholder=" UserName " />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+
+                    <label asp-for="Password" class="col-md control-label"></label>
+                    <div class="col-md">
+                        <input asp-for="Password" class="form-control" style="width: 282px;" placeholder=" password " />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        @*<label asp-for="RememberMe" class="col-md"></label>*@
+                        <h4> مرابه خاطر بسپار </h4>
+                        <input asp-for="RememberMe" style="padding-right: 250px;" />
+                        <span asp-validation-for="RememberMe"></span>
+                    </div>
+
+                    <button type="submit" class="btn flex-row" style="width: 282px;  background-color: #84C639">
+                        ورود
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+
+            @{
+
+                if (Model.ExternalLogins != null)
+                {
+                    <h5 class="font-medium m-b-20" style="font-size: 16px">  ورود با استفاده از اکانت گوگل :</h5>
+                    <form method="post" asp-controller="Account" asp-action="ExternalLogin">
+                        <div class="social">
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+
+                                @*<button type="submit"
+                                    class=" btn btn-warning  card-footer bg-transparent border-success" value="@provider.Name"
+                                    style="width: 282px"
+                                    title="   ورود با استفاده از اکانت گوگل  @provider.DisplayName ">
+                                @provider.DisplayName
+                            </button>*@
+
+
+
+                                <button type="submit"
+                                        value="@provider.Name"
+                                        style="width: 282px;margin-left: 30px;"
+                                        class="btn btn-warning   float-right " name="provider"
+                                        title="   ورود با استفاده از اکانت گوگل  @provider.DisplayName ">
+                                    @provider.DisplayName
+                                </button>
+
+
+
+                            }
+                        </div>
+                    </form>
+
+                }
+
+                else
+                {
+                    <a asp-controller="Account" asp-action="ExternalLogin"></a>
+                }
+            }
+        </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+@section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

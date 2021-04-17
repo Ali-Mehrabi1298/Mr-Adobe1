@@ -1,0 +1,57 @@
+﻿@page
+@model MohamadShop.Pages.Admin.AddFile.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Filess.Id" />
+            <div class="form-group">
+
+                <input asp-for="Filess.Name" class="form-control" placeholder="نام فایل" />
+                <span asp-validation-for="Filess.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input asp-for="Filess.Description" class="form-control" placeholder="توضیحات" />
+                <span asp-validation-for="Filess.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input asp-for="Filess.productName" class="form-control" placeholder="نام محصول" />
+                <span asp-validation-for="Filess.productName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input asp-for="Filess.part" class="form-control" placeholder=" قسمت" />
+                <span asp-validation-for="Filess.part" class="text-danger"></span>
+            </div>
+
+
+            <div><label @*asp-for="Productse.Picture"*@> فیلم</label></div>
+            <div>
+                <input asp-for="Productse.Picture" />
+                <span asp-validation-for="Productse.Picture"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

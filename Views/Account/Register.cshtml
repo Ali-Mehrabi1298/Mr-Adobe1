@@ -1,0 +1,86 @@
+﻿
+@model RegisterViewModel
+
+
+
+
+
+
+
+
+
+
+
+<div class="row ">
+    <div class="col-md-4"></div>
+    <div class="container">
+        <div class="col-md-5  alert alert-success" style="width: 372px;">
+            <div class="card border-success     bg-light ">
+                <div class="card-header bg-transparent border-success alert alert-primary">وارد حساب کاربریتان شوید</div>
+                <hr />
+
+                <div class="card-body text-success" style=" width: 282px; ">
+
+
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly"></div>
+
+
+
+                        <label asp-for="UserName" class="col-md control-label"></label>
+                        <div class="col-md">
+                            <input asp-for="UserName" class="form-control " style="width:282px;" placeholder=" UserName " />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <label asp-for="Email" class="col-md control-label">ایمیل</label>
+                        <div class="col-md">
+                            <input asp-for="Email" class="form-control" placeholder="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <label asp-for="Password" class="col-md control-label"></label>
+                        <div class="col-md">
+                            <input asp-for="Password" class="form-control" style="width: 282px;" placeholder=" password " />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+
+                        <label asp-for="ConfirmPassword" class="col-md control-label"></label>
+                        <div class="col-md">
+                            <input asp-for="ConfirmPassword" class="form-control" style="width: 282px;" placeholder=" password " />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn flex-row" style="width: 282px;  background-color: #84C639">
+                            ورود
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

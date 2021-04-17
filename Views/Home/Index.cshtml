@@ -1,0 +1,115 @@
+﻿
+@model Indexx
+
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="col-md-12">
+
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        @*<li data-target="#myCarousel" data-slide-to="1"></li>*@
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                       @await Component.InvokeAsync("Slider");
+                       
+                        @foreach (var Slider in Model.Sliders)
+                        {
+                        <partial name="_slider"   model="Slider" />
+
+                        }
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+            <hr />
+            <h4 class="alert alert-success">دوره ها</h4>
+
+            @foreach (var Item in Model.Products)
+            {
+
+                <partial name="_BoxProduct" model="@Item" />
+
+            }
+
+
+
+
+
+        </div>
+
+        <div class="col-md-3">
+            @await Component.InvokeAsync("ProductGroupsComponent")
+
+            <hr />
+            <div class="sidebar">
+                <div class="sidebar-text">
+                    <p></p>
+                </div>
+                <div class="sidebar-social">
+                    <ul>
+                        <li>
+                            <a href="https://t.me/joinchat/TN9qaKrfDid-PByU" class="telegram"><i class="fa fa-send"></i>دنبال کردن در تلگرام</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.instagram.com/mr.adobe1/" class="instagram"><i class="fa fa-instagram"></i>پیج اینستاگرام </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i>صفحه توئیتر ما</a>
+                        </li>
+                        <li>
+                            <a href="#" class="aparat"><i class="fa fa-video-camera"></i>دنبال کردن در آپارات</a>
+                        </li>
+                        <li>
+                            <a href="#" class="youtube"><i class="fa fa-youtube"></i>کانال یوتیوب</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="category-sidebar">
+                    <span><i class="fa fa-bookmark"></i>دسته بندی مطالب</span>
+                    <ul>
+                        <li><a href="https://t.me/joinchat/TN9qaKrfDid-PByU">دنبال کردن در تلگرام</a></li>
+                        <li><a href="https://www.instagram.com/mr.adobe1/">پیج اینستاگرام</a></li>
+                        <li><a href="#">صفحه توئیتر ما</a></li>
+                        <li><a href="#">دنبال کردن در آپارات</a></li>
+                        <li><a href="#">کانال یوتیوب</a></li>
+
+                    </ul>
+                </div>
+                <div class="category-sidebar ads-sidebar">
+                    <span><i class="fa fa-slack"></i>تبلیغات</span>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <figure>
+                                    <img src="img/ads/ads1.jpg" alt="">
+                                    <figcaption></figcaption>
+                                </figure>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

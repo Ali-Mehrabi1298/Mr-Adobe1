@@ -1,0 +1,69 @@
+﻿@page
+@model MohamadShop.Pages.Admin.Addproduct.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a class="btn btn-info" asp-page="Create">ایجاد محصول</a>
+    <hr />
+</p>
+<p>
+    <a class="btn btn-info" asp-page="IndexCTP"> درکدام دسته بندی قرار گیرد </a>
+</p>
+<div class="container">
+    <div class="col-md-2"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                       Id
+                    </th>
+
+                    <th>
+                        نام محصول
+                    </th>
+                    <th>
+                        توضیحات محصول
+                    </th>
+                    <th>
+                        قیمت
+                    </th>
+                    <th>
+                        رایگان
+                    </th>
+                    <th style="padding-left:203px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Product)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Free)
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ProductId">ویرایش</a> |
+                        <a class="btn btn-success" asp-page="./Details" asp-route-id="@item.ProductId">جزییات</a> |
+                        <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ProductId">حذف</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>

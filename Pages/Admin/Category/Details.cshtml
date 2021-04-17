@@ -1,0 +1,30 @@
+﻿@page
+@model MohamadShop.Pages.Admin.Category.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            نام دسته
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoty.Name)
+        </dd>
+        <dt class="col-sm-2">
+        توضیحات دسته
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoty.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Categoty.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

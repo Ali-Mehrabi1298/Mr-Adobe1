@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ShowGroupViewModel>
+
+
+
+
+
+<ul>
+        @foreach (var item in Model)
+        {
+            <li >
+                <a href="/Group/@item.GroupId/@item.Name" style="color:black">@item.Name</a>
+
+            </li>
+        }
+    </ul>
+
+
+
+
+
+    
