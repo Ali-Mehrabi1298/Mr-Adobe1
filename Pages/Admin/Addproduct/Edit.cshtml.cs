@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using MohamadShop.Models;
 
 namespace MohamadShop.Pages.Admin.Addproduct
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly MohamadShop.Data.Eshopecontex _context;

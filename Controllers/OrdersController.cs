@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MohamadShop.Data;
 using MohamadShop.Models;
 using MohamadShop.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,69 +21,109 @@ namespace MohamadShop.Controllers
     public class OrdersController : Controller
     {
         private Eshopecontex _ctx;
-
+     
         public OrdersController(Eshopecontex ctx)
         {
             _ctx = ctx;
         }
+
+        [Authorize]
         public IActionResult AddToCart(int id)
         {
-            var productId = _ctx.Product.Single(f => f.ProductId == id);
-            Order order = _ctx.Order.SingleOrDefault(o => !o.IsFinaly);
-            if (order == null)
-            {
-                order = new Order()
-                {UserName=User.Identity.Name,
-                    CreateDate = DateTime.Now,
-                    IsFinaly = false,
-                    Sum = 0,
-                    productId=id
-                    
-                };
-                _ctx.Order.Add(order);
-                _ctx.orderdetails.Add(new OrderDetail()
-                {
-                    orderIdd = order.OrderId,
-                    Count = 1,
-                    Price = _ctx.Product.Find(id).Price,
-                    ProductId = id
-                });
-                _ctx.SaveChanges();
-            }
-            else
-            {
-                var details = _ctx.orderdetails.SingleOrDefault(d => d.orderIdd == order.OrderId && d.ProductId == id);
-                if (details == null)
-                {
-                    _ctx.orderdetails.Add(new OrderDetail()
-                    {
-                        orderIdd = order.OrderId,
-                        Count = 1,
-                        Price = _ctx.Product.Find(id).Price,
-                        ProductId = id
-                    });
-                }
-                else
-                {
-                    details.Count += 1;
-                    _ctx.Update(details);
-                }
 
-                _ctx.SaveChanges();
+      
+           
+
+
+                var product = _ctx.Product.SingleOrDefault(p => p.ProductId == id);
+                if (product != null)
+                {
+                //var userId = /*int.Parse*/(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+                //var userId = _ctx.Users.Where(p=>p.Id==);
+              
+
+
+                var order = _ctx.Order.FirstOrDefault(o => o.UserName == User.Identity.Name && !o.IsFinaly);
+                    if (order != null)
+                    {
+
+                   
+                    var orderDetail =
+                            _ctx.orderdetails.FirstOrDefault(d =>
+                                d.OrderId == order.OrderId && d.ProductId == product.ProductId);
+                        if (orderDetail != null)
+                        {
+                            orderDetail.Count += 1;
+                        _ctx.Update(orderDetail);
+                    }
+                        else
+                        {
+                            _ctx.orderdetails.Add(new OrderDetail()
+                            {
+                                OrderId = order.OrderId,
+                                ProductId = product.ProductId,
+                                Price = product.Price,
+                                Count = 1
+                            });
+                        }
+
+
+
+                }
+                    else
+                    {
+
+
+
+                        order = new Order()
+                        {
+
+                         
+                            Sum = product.Price ,
+                            productId = id,
+                            IsFinaly = false,
+                            CreateDate = DateTime.Now,
+                            UserName = User.Identity.Name
+                        };
+                        _ctx.Order.Add(order);
+                        _ctx.SaveChanges();
+                        _ctx.orderdetails.Add(new OrderDetail()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.ProductId,
+                            Price = product.Price,
+                            Count = 1
+                        });
+                    }
+
+                    _ctx.SaveChanges();
+                UpdateSumOrder(order.OrderId);
+
             }
-            UpdateSumOrder(order.OrderId);
+
+
             return RedirectToAction("ShowOrder");
         }
 
-        public IActionResult ShowOrder()
+        public void UpdateSumOrder(int orderId)
         {
+            var order = _ctx.Order.Find(orderId);
+            order.Sum = _ctx.orderdetails.Where(o => o.OrderId == order.OrderId).Select(d => d.Count * d.Price).Sum();
+            _ctx.Update(order);
+            _ctx.SaveChanges();
+        }
 
-            Order order = _ctx.Order.SingleOrDefault(o => !o.IsFinaly);
-
+        [Authorize]
+            public IActionResult ShowOrder()
+            {
+                var userId = /*int.Parse*/(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+                var order = _ctx.Order.Where(o => o.UserName == User.Identity.Name && !o.IsFinaly)
+                    .Include(o => o.OrderDetails)
+                    .ThenInclude(c => c.Product).FirstOrDefault();
             List<ShowOrderViewModel> _list = new List<ShowOrderViewModel>();
             if (order != null)
             {
-                var details = _ctx.orderdetails.Where(d => d.orderIdd == order.OrderId).ToList();
+                var details = _ctx.orderdetails.Where(d => d.OrderId == order.OrderId).ToList();
                 foreach (var item in details)
                 {
                     var product = _ctx.Product.Find(item.ProductId);
@@ -87,7 +131,7 @@ namespace MohamadShop.Controllers
                     _list.Add(new ShowOrderViewModel()
                     {
                         Count = item.Count,
-                     
+                        
                         OrderDetailId = item.OrderDetailID,
                         Price = item.Price,
                         Sum = item.Count * item.Price,
@@ -97,57 +141,22 @@ namespace MohamadShop.Controllers
                 }
             }
 
-            return View(_list);
-        }
 
-        public IActionResult Delete(int id)
-        {
-            var orderDetail = _ctx.orderdetails.Find(id);
-            _ctx.Remove(orderDetail);
-            _ctx.SaveChanges();
-            return RedirectToAction("ShowOrder");
-        }
-
-        public IActionResult Command(int id, string command)
-        {
-            var orderDetail = _ctx.orderdetails.Find(id);
-
-            switch (command)
-            {
-                case "up":
-                    {
-                        orderDetail.Count += 1;
-                        _ctx.Update(orderDetail);
-                        break;
-                    }
-                case "down":
-                    {
-                        orderDetail.Count -= 1;
-                        if (orderDetail.Count == 0)
-                        {
-                            _ctx.orderdetails.Remove(orderDetail);
-                        }
-                        else
-                        {
-                            _ctx.Update(orderDetail);
-                        }
-
-                        break;
-                    }
+            return View(order);
             }
 
+            [Authorize]
+            public IActionResult RemoveCart(int detailId)
+            {
 
-            _ctx.SaveChanges();
-            return RedirectToAction("ShowOrder");
-        }
-        public void UpdateSumOrder(int orderId)
-        {
-            var order = _ctx.Order.Find(orderId);
-            order.Sum = _ctx.orderdetails.Where(o => o.orderIdd == order.OrderId).Select(d => d.Count * d.Price).Sum();
-            _ctx.Update(order);
-            _ctx.SaveChanges();
-        }
+                var orderDetail = _ctx.orderdetails.Find(detailId);
+                _ctx.Remove(orderDetail);
+                _ctx.SaveChanges();
 
+                return RedirectToAction("ShowOrder");
+            }
+
+        
         public IActionResult Payment()
         {
             var order = _ctx.Order.FirstOrDefault(o => !o.IsFinaly);
@@ -195,7 +204,7 @@ namespace MohamadShop.Controllers
             {
                 return View("PaymentError", res);
             }
-            return Content("");
+            //return Content("");
         }
 
         public async Task<T> CallApi<T>(string apiUrl, object value) where T : new()

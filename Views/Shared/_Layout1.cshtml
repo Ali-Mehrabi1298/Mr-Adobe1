@@ -40,37 +40,43 @@
                          
                         </form>
                     }
-                    <ul>
-                        <li><a asp-action="Index" asp-controller="Home">صفحه اصلی</a></li>
+                <ul>
+                    <li><a asp-action="Index" asp-controller="Home">صفحه اصلی</a></li>
 
 
 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="http://example.com" id="dropdown09" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">دوره ها</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown09" style="list-style:none;background-color:whitesmoke">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="http://example.com" id="dropdown09" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">دوره ها</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown09" style="list-style:none;background-color:whitesmoke">
 
 
-                                @await Component.InvokeAsync("Dropdown")
+                            @await Component.InvokeAsync("Dropdown")
 
-                            </div>
+                        </div>
 
-                        </li>
-
-
-
+                    </li>
 
 
 
 
 
 
-                        <li><a asp-action="AboutMe" asp-controller="Home">درباره </a></li>
-                        <li><a asp-action="Login" asp-controller="Account">ورود</a></li>
-                        <li><a asp-action="Register" asp-controller="Account">ثبت نام</a></li>
-                    </ul>
+
+
+
+                    <li><a asp-action="AboutMe" asp-controller="Home">درباره </a></li>
+                    <li><a asp-action="Login" asp-controller="Account">ورود</a></li>
+                    <li><a asp-action="Register" asp-controller="Account">ثبت نام</a></li>
+                    <li></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item pull-right">
+                            @User.Identity.Name عزیزخوش آمدید!
+                        </li>}
+                </ul>
                 </div>
             </div>
         </div>

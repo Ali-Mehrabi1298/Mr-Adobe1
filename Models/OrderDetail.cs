@@ -14,7 +14,7 @@ namespace MohamadShop.Models
 
         [Required]
 
-        public int orderIdd { get; set; }
+        public int OrderId { get; set; }
         [Required]
         public int ProductId { get; set; }
 
@@ -27,7 +27,7 @@ namespace MohamadShop.Models
 
 
         public Order Order { get; set; }
-       
+        [ForeignKey("ProductId")]
         public Product Product { get; set; }
 
 

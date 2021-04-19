@@ -33,8 +33,15 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\Views\_ViewImports.cshtml"
+using MohamadShop.ViewModels.Account;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"13d39c2f14399eb29779408cfa22993b4fd7631c", @"/Views/Shared/_slider.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a67363c3fa972fa8ccc2eaf18f0c68f0ae299d26", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1004534af3386c3c2c31e1b10ef8efc37d23dcda", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__slider : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Slider>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Detail", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -65,7 +72,7 @@ using Microsoft.AspNetCore.Identity;
         {
             WriteLiteral("\r\n\r\n\r\n\r\n");
             WriteLiteral("\r\n\r\n\r\n<div class=\"item\">\r\n \r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13d39c2f14399eb29779408cfa22993b4fd7631c3984", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13d39c2f14399eb29779408cfa22993b4fd7631c4186", async() => {
                 WriteLiteral("\r\n        <figure>\r\n            <img");
                 BeginWriteAttribute("src", " src=\"", 185, "\"", 218, 3);
                 WriteAttributeValue("", 191, "img/slide/", 191, 10, true);

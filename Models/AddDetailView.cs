@@ -12,7 +12,7 @@ namespace MohamadShop.Models
         public Product product { get; set; }
 
         public List<Categoty> categories { get; set; }
-        public   Order order  { get; set; }
+        public Order order  { get; set; }
         public OrderDetail OrderDetail { get; set; }
        
         public List<Filess> Filess { get; set; }

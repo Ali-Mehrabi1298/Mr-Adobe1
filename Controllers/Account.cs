@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MohamadShop.Models;
+using MohamadShop.ViewModels.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;

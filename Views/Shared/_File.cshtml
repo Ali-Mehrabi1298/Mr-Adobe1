@@ -1,0 +1,36 @@
+﻿
+@model Filess
+
+
+
+<hr />
+<div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+    <div>
+        <div style="float:left">
+            <a class="btn btn-success" href="/File/@(Model.Name).mp4" download="downloude">دانلود</a>
+
+            <a class="btn btn-primary" href="/File/@(Model.Name).mp4">
+                پخش
+
+            </a>
+
+        </div>
+
+
+        <ul style="display:flex;list-style:none">
+            <li>  @(Model.part)-  </li>
+            <li>@(Model.Description)   </li>
+        </ul>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+

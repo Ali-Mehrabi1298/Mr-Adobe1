@@ -11,6 +11,7 @@ using MohamadShop.Models;
 
 namespace MohamadShop.Pages.Admin.Addproduct
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly MohamadShop.Data.Eshopecontex _context;

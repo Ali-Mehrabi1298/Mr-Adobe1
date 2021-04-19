@@ -330,16 +330,13 @@ namespace MohamadShop.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("orderIdd")
                         .HasColumnType("int");
 
                     b.HasKey("OrderDetailID");
@@ -491,7 +488,9 @@ namespace MohamadShop.Migrations
                 {
                     b.HasOne("MohamadShop.Models.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MohamadShop.Models.Product", "Product")
                         .WithMany("OrderDetails")

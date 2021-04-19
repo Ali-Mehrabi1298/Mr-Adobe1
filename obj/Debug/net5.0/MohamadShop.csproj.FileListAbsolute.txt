@@ -239,3 +239,11 @@ G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\
 G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Pages\Admin\AddFile\Details.cshtml.g.cs
 G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Pages\Admin\AddFile\Edit.cshtml.g.cs
 G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Pages\Admin\AddFile\Index.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\Shared\_File.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageRole\Index.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageRole\AddRole.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageRole\EditRole.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageUser\Index.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageUser\EditUser.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageUser\AddUserToRole.cshtml.g.cs
+G:\Users\ALimehrabi\source\repos\MohamadShop\MohamadShop\obj\Debug\net5.0\Razor\Views\ManageUser\RemoveUserFromRole.cshtml.g.cs

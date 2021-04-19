@@ -17,7 +17,6 @@
     <p class="py-5 text-justify col-md  ">@Model.product.Text</p>
     <br />
 
-
     @if (Model.product.Free == true)
     {
 
@@ -30,34 +29,20 @@
 
             <hr />
             <div class="alert alert-success col-md-10" style="margin: auto;" alert">
-
-
                 <div>
                     <div style="float:left">
                         <a class="btn btn-success" href="/File/@(S.Name).mp4" download="downloude">دانلود</a>
-
                         <a class="btn btn-primary" href="/File/@(S.Name).mp4">
                             پخش
-
                         </a>
-
                     </div>
-
-
                     <ul style="display:flex;list-style:none">
                         <li>  @(S.part)-  </li>
                         <li>@(S.Description)   </li>
                     </ul>
-
-
                 </div>
-
-
-
             </div>
-
         }}
-
     else
     {
         <h3>قیمت :   @Model.product.Price تومان</h3>
@@ -65,25 +50,14 @@
            id="Add"
            asp-controller="Orders" asp-action="AddToCart" asp-route-id="@Model.product.ProductId">افزودن به سبد خرید</a>
         <br />
-
         @if (SignInManager.IsSignedIn(User))
         {
-
-
             @try
             {
-
                 @if (User.Identity.Name == Model.order.UserName && Model.product.ProductId == Model.order.productId && Model.order.IsFinaly == true)
                 {
-
-
                     @foreach (var S in Model.Filess)
-
                     {
-
-
-
-
                         <hr />
                         <div class="alert alert-success col-md-10" style="margin: auto;" alert">
 
@@ -131,48 +105,26 @@
 
                     <hr />
                     <div class="alert alert-success col-md-10" style="margin: auto;" alert">
-
-
                         <div>
                             <div style="float:left">
                                 <a class="btn btn-success" href="#Add">دانلود</a>
-
                                 <a class="btn btn-primary" href="#Add">
                                     پخش
-
                                 </a>
-
                             </div>
-
-
                             <ul style="display:flex;list-style:none">
                                 <li>  @(S.part)-  </li>
                                 <li>@(S.Description)   </li>
                             </ul>
-
-
                         </div>
-
-
-
                     </div>
-
                 }
-
-
             }
-
-
         }
         else
         {
             @foreach (var S in Model.Filess)
-
             {
-
-
-
-
                 <hr />
                 <div class="alert alert-success col-md-10" style="margin: auto;" alert">
 
@@ -213,6 +165,7 @@
     <hr />
 
 </div>
+
 
 
 
