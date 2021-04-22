@@ -50,12 +50,58 @@
            id="Add"
            asp-controller="Orders" asp-action="AddToCart" asp-route-id="@Model.product.ProductId">افزودن به سبد خرید</a>
         <br />
+
+
+
         @if (SignInManager.IsSignedIn(User))
         {
-            @try
+            try
             {
-                @if (User.Identity.Name == Model.order.UserName && Model.product.ProductId == Model.order.productId && Model.order.IsFinaly == true)
+                @if (User.Identity.Name == Model.order.UserName && Model.order.IsFinaly == false && Model.OrderDetail.ProductId == Model.product.ProductId)
+
                 {
+                    @foreach (var S in Model.Filess)
+                    {
+
+                        <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
+                            <div>
+                                <div style="float:left">
+                                    <a class="btn btn-success" href="#Add">دانلود</a>
+
+                                    <a class="btn btn-primary" href="#Add">
+                                        پخش
+
+                                    </a>
+
+                                </div>
+
+
+                                <ul style="display:flex;list-style:none">
+                                    <li>  @(S.part)-  </li>
+                                    <li>@(S.Description)   </li>
+                                </ul>
+
+
+                            </div>
+
+
+
+                        </div>
+                    }
+                }
+
+
+
+
+
+
+
+                @if (User.Identity.Name == Model.order.UserName && Model.order.IsFinaly == true && Model.OrderDetail.ProductId == Model.product.ProductId)
+                {
+
+
                     @foreach (var S in Model.Filess)
                     {
                         <hr />
@@ -87,78 +133,57 @@
                         </div>
 
 
-
-
-
                     }
 
 
-                } }
-            catch
-            {
-                @foreach (var S in Model.Filess)
 
+
+
+                }
+
+            }
+
+            catch
+
+            {
+
+
+                @foreach (var S in Model.Filess)
                 {
 
-
-
-
-                    <hr />
                     <div class="alert alert-success col-md-10" style="margin: auto;" alert">
+
+
                         <div>
                             <div style="float:left">
                                 <a class="btn btn-success" href="#Add">دانلود</a>
+
                                 <a class="btn btn-primary" href="#Add">
                                     پخش
+
                                 </a>
+
                             </div>
+
+
                             <ul style="display:flex;list-style:none">
                                 <li>  @(S.part)-  </li>
                                 <li>@(S.Description)   </li>
                             </ul>
+
+
                         </div>
+
+
+
                     </div>
                 }
             }
-        }
-        else
-        {
-            @foreach (var S in Model.Filess)
-            {
-                <hr />
-                <div class="alert alert-success col-md-10" style="margin: auto;" alert">
 
-
-                    <div>
-                        <div style="float:left">
-                            <a class="btn btn-success" href="#Add">دانلود</a>
-
-                            <a class="btn btn-primary" href="#Add">
-                                پخش
-
-                            </a>
-
-                        </div>
-
-
-                        <ul style="display:flex;list-style:none">
-                            <li>  @(S.part)-  </li>
-                            <li>@(S.Description)   </li>
-                        </ul>
-
-
-                    </div>
-
-
-
-                </div>
-
-            }
+            @*}*@
 
 
         }
-
-
     }
 
 
@@ -172,3 +197,8 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+
+
+

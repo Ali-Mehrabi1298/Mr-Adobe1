@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MohamadShop.Data;
+using MohamadShop.Data.Repository;
 using MohamadShop.Models;
 using MohamadShop.Models.ViewModels;
+using MohamadShop.ViewModels.ManageUser;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,11 +26,19 @@ namespace MohamadShop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private Eshopecontex _contex;
-        SignInManager<IdentityUser> SignInManager;
-        public HomeController(ILogger<HomeController> logger, Eshopecontex contex)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        private readonly SignInManager<IdentityUser> _SignInManager;
+        private readonly IGroupRepository _groupRepository;
+
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, Eshopecontex contex,
+            SignInManager<IdentityUser> SignInManager, IGroupRepository groupRepository)
         {
+            _userManager = userManager;
             _logger = logger;
             _contex = contex;
+            _groupRepository = groupRepository;
+            _SignInManager = SignInManager;
         }
 
         public IActionResult Index()
@@ -37,11 +47,11 @@ namespace MohamadShop.Controllers
             var product = _contex.Product.ToList();
 
             var slider = _contex.Sliders.Skip(1).Take(3).ToList();
-    
+
 
             var Index = new Indexx()
             {
-             
+
                 Products = product,
                 Sliders = slider
             };
@@ -75,7 +85,7 @@ namespace MohamadShop.Controllers
 
 
         [HttpPost]
-        public IActionResult CallBackk (CallbackRequestPayment result)
+        public IActionResult CallBackk(CallbackRequestPayment result)
         {
             var order = _contex.Order.FirstOrDefault(o => o.OrderId == result.OrderId);
             if (order == null)
@@ -159,8 +169,8 @@ namespace MohamadShop.Controllers
 
 
             var product = _contex.Product
-                 //.Include(p => p.item)
-                 .SingleOrDefault(p => p.ProductId == id);
+             //.Include(p => p.item)
+             .SingleOrDefault(p => p.ProductId == id);
 
 
 
@@ -179,57 +189,100 @@ namespace MohamadShop.Controllers
             var Categoress = _contex.Product.Where(A => A.ProductId == id).SelectMany(s => s.CategoryToproducts)
               .Select(ca => ca.Category).ToList();
 
+            
 
 
 
 
+            
 
-            var Orrder = _contex.Order.Single(d => d.UserName == User.Identity.Name);
-
-
-
-            var Orrderdetaill = _contex.orderdetails.Single(d => d.ProductId == id && d.Order.OrderId == d.OrderId);
-            var pro = new AddDetailView()
+            var order = _contex.Order.FirstOrDefault(o => o.UserName == User.Identity.Name && o.IsFinaly);
+            if (order != null)
             {
 
-                product = product,
-                categories = Categoress,
-                Filess = File,
-                OrderDetail = Orrderdetaill,
-                order = Orrder
-            };
-            return View(pro);
+
+                var orderDetail =
+                        _contex.orderdetails.FirstOrDefault(d =>
+                            d.OrderId == order.OrderId && d.ProductId == product.ProductId);
+                var proo = new AddDetailView()
+                {
+                    order = order,
+                    OrderDetail = orderDetail,
+                    product = product,
+                    categories = Categoress,
+                    Filess = File,
+                   
+                };
+                return View(proo);
 
 
+            }
+            else
+            {
+
+                var proo = new AddDetailView()
+                {
+                   
+                    product = product,
+                    categories = Categoress,
+                    Filess = File,
+
+                };
+                return View(proo);
+
+
+
+
+            }
+
+         
 
         }
 
+        //var proo = new AddDetailView()
+        //{
+
+        //    product = product,
+        //    categories = Categoress,
+        //    Filess = File,
+
+        //};
 
 
 
-        public IActionResult AboutMe()
-        {
-            return View();
-
-
-        }
-
-        public IActionResult Callme()
-        {
-            return View();
-
-
-        }
-       
-
-     
+    
 
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-       public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
+
+
+
+
+    public IActionResult AboutMe()
+    {
+
+        return View();
+
+
     }
+
+    public IActionResult Callme()
+    {
+        return View();
+
+
+    }
+
+
+
+
+
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
 }

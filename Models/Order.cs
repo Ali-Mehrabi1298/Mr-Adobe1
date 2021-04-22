@@ -13,7 +13,6 @@ namespace MohamadShop.Models
 
 
 
-        [Key]
         
         public int OrderId { get; set; }
 

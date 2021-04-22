@@ -17,7 +17,7 @@ namespace MohamadShop.Data.Repository
         public IEnumerable<ShowGroupViewModel> GetShowGroupViewModels();
         public IEnumerable<Slider> Sliders();
 
-
+       
     }
 
 
@@ -65,6 +65,8 @@ namespace MohamadShop.Data.Repository
                 ProductCount = _context.CategoryToproducts.Count(g => g.CategoryId == c.Id)
             }).ToList();
         }
+
+
 
         public IEnumerable<Slider> Sliders()
         {

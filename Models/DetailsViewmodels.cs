@@ -12,6 +12,7 @@ namespace MohamadShop.Models
         public List<Categoty> Categories { get; set; }
         //public List<Ifiles> Filees { get; set; }
 
+        public  Order order { get; set; }
 
 
     }

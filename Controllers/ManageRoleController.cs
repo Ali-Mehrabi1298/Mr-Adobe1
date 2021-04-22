@@ -19,6 +19,7 @@ namespace MohamadShop.Controllers
         public IActionResult Index()
         {
             var roles = _roleManager.Roles.ToList();
+            
             return View(roles);
         }
 
