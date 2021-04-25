@@ -239,14 +239,7 @@ namespace MohamadShop.Controllers
 
         }
 
-        //var proo = new AddDetailView()
-        //{
-
-        //    product = product,
-        //    categories = Categoress,
-        //    Filess = File,
-
-        //};
+      
 
 
 
